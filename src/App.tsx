@@ -1,3 +1,7 @@
-export default function App() {
-    return <div>Hi</div>;
+import { MapContainer } from "./components/MapContainer/MapContainer";
+
+export const App = () => {
+    return (
+        <MapContainer />
+    );
 }
