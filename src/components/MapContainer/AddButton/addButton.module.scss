@@ -1,0 +1,24 @@
+.button {
+    width: 200px;
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    height: 50px;
+    overflow: visible;
+    cursor: pointer;
+
+    background: white;
+    color: inherit;
+    // font: inherit;
+    line-height: normal;
+
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    // -webkit-appearance: none;
+
+    &::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+}

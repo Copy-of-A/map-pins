@@ -6,7 +6,9 @@ import {
     YMapsApi,
 } from "react-yandex-maps";
 import { Balloon } from "./components/Balloon/Balloon";
-
+import type { RootState } from '../../app/store'
+import { useSelector, useDispatch } from 'react-redux'
+import { addBalloon } from './components/Balloon/models/balloons.slice'
 
 const mapState = {
     center: [55.751574, 37.573856],
@@ -17,8 +19,11 @@ export const MapContainer = () => {
     const handleClick = () => console.log("BaloonClick")
     const [mapRef, setMapRef] = useState<any>(null);
     const [mapInstanceRef, setMapInstanceRef] = useState<YMapsApi | null>(null)
+    const pins = useSelector((state: RootState) => state.baloons);
+    console.log("pins", pins)
+    const dispatch = useDispatch()
 
-    const createTemplateLayoutFactory = (ymaps: YMapsApi) => {
+    const createTemplateLayoutFactory = (ymaps: any) => {
         setMapInstanceRef(ymaps)
     }
 
@@ -36,7 +41,7 @@ export const MapContainer = () => {
                 defaultState={mapState}
                 modules={['templateLayoutFactory']}
             >
-                <Balloon id={"myId"} onClick={handleClick} mapInstanceRef={mapInstanceRef} />
+                {pins.map((_) => <Balloon pin={_} key={_.id} onClick={handleClick} mapInstanceRef={mapInstanceRef} />)}
             </Map>
         </YMaps>
     )

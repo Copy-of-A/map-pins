@@ -4,24 +4,16 @@ import {
     YMapsApi
 } from "react-yandex-maps";
 import './balloon.scss'
+import { PinData } from "./models/balloons.slice";
 
 type BalloonProps = {
-    id: string;
+    pin: PinData;
     onClick: (orderId: string) => void;
     mapInstanceRef: YMapsApi | null;
 };
 
 export const Balloon: FC<BalloonProps> = memo(
-    ({ id, mapInstanceRef, onClick }) => {
-        const pin = {
-            coordinates: {
-                lat: 55.684758,
-                lon: 37.738521,
-            },
-            title: "My title",
-            description: "My description",
-            isActive: false,
-        }
+    ({ pin, mapInstanceRef, onClick }) => {
         // const pin = useSelector(createMapPlacemarkByIdSelector(id)) as PinData;
         if (!mapInstanceRef) return null;
 
@@ -74,6 +66,7 @@ export const Balloon: FC<BalloonProps> = memo(
                         radius: 25
                     }
                 }}
+                onClick={onClick}
             />
         )
     }
