@@ -1,0 +1,21 @@
+.sidebar {
+    position: absolute;
+    height: calc(100vh - 80px);
+    width: 320px;
+    left: 0;
+    top: 0;
+    background-color: white;
+    padding: 40px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__heading {
+        font-size: 20px;
+    }
+
+    &__button{
+        width: 100%;
+    }
+}

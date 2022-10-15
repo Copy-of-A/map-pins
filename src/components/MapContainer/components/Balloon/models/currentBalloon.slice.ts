@@ -1,39 +1,50 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PinData } from "./balloons.slice";
+import { BalloonData } from "./balloons.slice";
+import { v4 } from 'uuid';
 
-const initialState: PinData = {
-    id: "0",
+const initialState: BalloonData | null = {
     coordinates: {
-        lat: 55.684758,
-        lon: 37.738521,
+        lat: 55.5, lon: 37.738521
     },
+    adress: "dhbvhbv",
+    id: "1111",
     title: "",
     description: "",
     isActive: false,
-    adress: ""
-}
+};
 
-export const currentBaloonSlice = createSlice({
-    name: "baloons",
+export type PinData = Omit<BalloonData, "title" | "id" | "description" | "isActive">
+
+export const currentBalloonSlice = createSlice({
+    name: "currentBalloon",
     initialState,
     reducers: {
-        addPinData: (state, action) => {
-            state.coordinates = action.payload
+        addPinData: (state: BalloonData | null, action: PayloadAction<PinData>) => {
+            const { coordinates, adress } = action.payload
+            state = {
+                coordinates,
+                adress,
+                id: v4(),
+                title: "",
+                description: "",
+                isActive: false,
+            }
+
         },
-        changeIsActive: (state) => {
-            state.isActive = !state.isActive
+        resetCurrentBaloon: (state: BalloonData | null) => {
+            state = null;
         },
-        changeTitle: (state, action: PayloadAction<string>) => {
-            state.title = action.payload
+        changeIsActive: (state: BalloonData | null) => {
+            if (state) state.isActive = !state.isActive
         },
-        changeDescription: (state, action: PayloadAction<string>) => {
-            state.description = action.payload
+        changeTitle: (state: BalloonData | null, action: PayloadAction<string>) => {
+            if (state) state.title = action.payload
         },
-        changeAdress: (state, action: PayloadAction<string>) => {
-            state.adress = action.payload
+        changeDescription: (state: BalloonData | null, action: PayloadAction<string>) => {
+            if (state) state.description = action.payload
         },
     }
 })
 
-export const { addPinData, changeIsActive, changeTitle, changeDescription, changeAdress } = currentBaloonSlice.actions
-export default currentBaloonSlice.reducer
+export const { addPinData, resetCurrentBaloon, changeIsActive, changeTitle, changeDescription } = currentBalloonSlice.actions
+export default currentBalloonSlice.reducer

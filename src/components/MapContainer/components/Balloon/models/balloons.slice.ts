@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export interface PinData {
+export interface BalloonData {
     id: string;
     coordinates: {
         lat: number
@@ -12,7 +12,7 @@ export interface PinData {
     adress: string
 }
 
-const initialState: Array<PinData> = [
+const initialState: Array<BalloonData> = [
     {
         id: "0",
         coordinates: {
@@ -38,10 +38,10 @@ const initialState: Array<PinData> = [
 ]
 
 export const baloonsSlice = createSlice({
-    name: "baloons",
+    name: "balloons",
     initialState,
     reducers: {
-        addBalloon: (state: Array<PinData>, action: PayloadAction<PinData>) => {
+        addBalloon: (state: Array<BalloonData>, action: PayloadAction<BalloonData>) => {
             state.push(action.payload)
         }
     }

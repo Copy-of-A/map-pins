@@ -6,7 +6,7 @@ import {
     YMapsApi,
 } from "react-yandex-maps";
 import { Balloon } from "./components/Balloon/Balloon";
-import type { RootState } from '../../app/store'
+import type { RootState } from '../../store'
 import { useSelector, useDispatch } from 'react-redux'
 import { addBalloon } from './components/Balloon/models/balloons.slice'
 
@@ -19,7 +19,7 @@ export const MapContainer = () => {
     const handleClick = () => console.log("BaloonClick")
     const [mapRef, setMapRef] = useState<any>(null);
     const [mapInstanceRef, setMapInstanceRef] = useState<YMapsApi | null>(null)
-    const pins = useSelector((state: RootState) => state.baloons);
+    const pins = useSelector((state: RootState) => state.balloons);
     console.log("pins", pins)
     const dispatch = useDispatch()
 

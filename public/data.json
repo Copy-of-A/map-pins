@@ -1,0 +1,32 @@
+{
+    "reference": {
+      "titles": [
+        {
+          "id": 0,
+          "name": "Title 1"
+        },
+        {
+          "id": 1,
+          "name": "Title 2"
+        },
+        {
+          "id": 2,
+          "name": "Title 3"
+        }
+      ],
+      "descriptions": [
+        {
+          "id": 0,
+          "name": "Description 1"
+        },
+        {
+          "id": 1,
+          "name": "Description 2"
+        },
+        {
+          "id": 2,
+          "name": "Description 3"
+        }
+      ]
+    }
+  }

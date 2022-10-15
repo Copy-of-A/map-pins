@@ -4,10 +4,10 @@ import {
     YMapsApi
 } from "react-yandex-maps";
 import './balloon.scss'
-import { PinData } from "./models/balloons.slice";
+import { BalloonData } from "./models/balloons.slice";
 
 type BalloonProps = {
-    pin: PinData;
+    pin: BalloonData;
     onClick: (orderId: string) => void;
     mapInstanceRef: YMapsApi | null;
 };
