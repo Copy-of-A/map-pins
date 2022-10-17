@@ -31,7 +31,7 @@ const initialState: Array<BalloonData> = [
             lon: 37.8,
         },
         title: "My title 111",
-        description: "My description 1111",
+        description: "My description 1111 with many many words in baloon more than 2 strings or maybe even three. My description 1111 with many many words in baloon more than 2 strings or maybe even three",
         isActive: false,
         adress: "My adress 1111"
     }
