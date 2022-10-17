@@ -5,7 +5,6 @@ import {
 import { Balloon } from "./components/Balloon/Balloon";
 import { useMapContainer } from "./mapContainer.hook";
 import styles from "./map.module.scss"
-import { BalloonData } from "./components/Balloon/models/balloons.slice";
 
 const mapState = {
     center: [55.751574, 37.573856],
@@ -27,7 +26,7 @@ export const MapContainer = () => {
         <>
             {pins.length === 0 && hideSideBar && <div className={styles.overlay}><h1>Пусто</h1></div>}
             <YMaps
-                query={{ load: "package.full", apikey: "25ee6f03-e8c6-4612-96ea-e0d817effe5a" }}
+                query={{ load: "package.search", apikey: process.env.YANDEX_API_KEY }}
             >
                 <Map
                     onLoad={createTemplateLayoutFactory}

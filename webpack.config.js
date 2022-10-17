@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const devMode = process.env.NODE_ENV !== "production";
+const Dotenv = require('dotenv-webpack');
 
 /**@type import("webpack-cli").WebpackConfiguration*/
 module.exports = {
@@ -34,6 +35,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "public", "index.html"),
         }),
+        new Dotenv(),
     ].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
     resolve: {
         extensions: [
