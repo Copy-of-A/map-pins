@@ -2,7 +2,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { BalloonData } from "./balloons.slice";
 import { v4 } from 'uuid';
 
-const initialState: BalloonData | null = null;
+export interface CurrentBalloonState {
+    currentBalloon: BalloonData | null;
+    titleFutureBalloon: string;
+    descriptionFutureBalloon: string;
+}
+
+const initialState: CurrentBalloonState = {
+    currentBalloon: null,
+    titleFutureBalloon: "",
+    descriptionFutureBalloon: "",
+};
 
 export type PinData = Omit<BalloonData, "title" | "id" | "description" | "isActive">
 
@@ -10,36 +20,47 @@ export const currentBalloonSlice = createSlice({
     name: "currentBalloon",
     initialState,
     reducers: {
-        addPinData: (state: BalloonData | null, action: PayloadAction<PinData>) => {
+        addPinData: (state: CurrentBalloonState, action: PayloadAction<PinData>) => {
             const { coordinates, adress } = action.payload
-            if (state) {
-                return ({
-                    ...state,
-                    coordinates,
-                    adress,
-                })
+            if (state.currentBalloon) {
+                state.currentBalloon.coordinates = coordinates;
+                state.currentBalloon.adress = adress
             } else {
-                return ({
+                state.currentBalloon = {
                     coordinates,
                     adress,
                     id: v4(),
-                    title: "",
-                    description: "",
-                    isActive: false,
-                } as any)
+                    title: state.titleFutureBalloon,
+                    description: state.descriptionFutureBalloon,
+                    isActive: true,
+                }
             }
         },
-        resetCurrentBaloon: () => {
-            return null;
+        resetCurrentBaloon: (state: CurrentBalloonState) => {
+            state.currentBalloon = null;
+            state.descriptionFutureBalloon = ""
+            state.titleFutureBalloon = ""
         },
-        changeTitle: (state: BalloonData | null, action: PayloadAction<string>) => {
-            if (state) state.title = action.payload
+        changeTitle: (state: CurrentBalloonState, action: PayloadAction<string>) => {
+            if (state.currentBalloon) {
+                state.currentBalloon.title = action.payload
+            } 
+            else {
+                state.titleFutureBalloon = action.payload
+            }
         },
-        changeDescription: (state: BalloonData | null, action: PayloadAction<string>) => {
-            if (state) state.description = action.payload
+        changeDescription: (state: CurrentBalloonState, action: PayloadAction<string>) => {
+            if (state.currentBalloon) {
+                state.currentBalloon.description = action.payload
+            }
+            else {
+                state.descriptionFutureBalloon = action.payload
+            }
         },
-        changeAdress: (state: BalloonData | null, action: PayloadAction<string>) => {
-            if (state) state.adress = action.payload
+        changeAdress: (state: CurrentBalloonState, action: PayloadAction<string>) => {
+            if (state.currentBalloon) {
+                state.currentBalloon.adress = action.payload
+            }
         },
     }
 })

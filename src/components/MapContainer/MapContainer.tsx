@@ -5,6 +5,7 @@ import {
 import { Balloon } from "./components/Balloon/Balloon";
 import { useMapContainer } from "./mapContainer.hook";
 import styles from "./map.module.scss"
+import { BalloonData } from "./components/Balloon/models/balloons.slice";
 
 const mapState = {
     center: [55.751574, 37.573856],
@@ -18,7 +19,7 @@ export const MapContainer = () => {
         mapInstanceRef,
         pins,
         hideSideBar,
-        currentPin,
+        currentBalloon,
         onMapClick,
     } = useMapContainer();
 
@@ -35,8 +36,8 @@ export const MapContainer = () => {
                     modules={['templateLayoutFactory']}
                     onClick={onMapClick}
                 >
-                    {currentPin && <Balloon pin={currentPin} key={currentPin.id} onClick={() => { }} mapInstanceRef={mapInstanceRef} isNewPin={true} />}
-                    {pins && pins.map((_) => <Balloon pin={_} key={_.id} onClick={handleClickPin} mapInstanceRef={mapInstanceRef} isNewPin={false} />)}
+                    {currentBalloon.currentBalloon && <Balloon pin={currentBalloon.currentBalloon} key={currentBalloon.currentBalloon.id} onClick={() => { }} mapInstanceRef={mapInstanceRef} isNewPin={true} />}
+                    {hideSideBar && pins && pins.map((_) => <Balloon pin={_} key={_.id} onClick={handleClickPin} mapInstanceRef={mapInstanceRef} isNewPin={false} />)}
                 </Map>
             </YMaps>
         </>

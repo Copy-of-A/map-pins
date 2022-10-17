@@ -38,8 +38,8 @@ export const useSideBar = () => {
     }, [])
 
     const handleAddClick = () => {
-        if (currentBalloon) {
-            dispatch(addBalloon(currentBalloon))
+        if (currentBalloon.currentBalloon) {
+            dispatch(addBalloon(currentBalloon.currentBalloon))
             dispatch(resetCurrentBaloon())
             dispatch(setIsActive())
         }

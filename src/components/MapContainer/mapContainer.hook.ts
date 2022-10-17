@@ -17,7 +17,7 @@ export const useMapContainer = () => {
 
     const hideSideBar = !useSelector((state: RootState) => state.sidebar.isActive)
 
-    const currentPin = useSelector((state: RootState) => state.currentBalloon)
+    const currentBalloon = useSelector((state: RootState) => state.currentBalloon)
 
     const createTemplateLayoutFactory = (ymaps: any) => {
         setMapInstanceRef(ymaps)
@@ -32,13 +32,13 @@ export const useMapContainer = () => {
             adress: "поиск...",
         }))
 
-        // if (mapInstanceRef) {
-        //     mapInstanceRef.geocode(coords)
-        //         .then((res: any) => {
-        //             const firstGeoObject = res.geoObjects.get(0);
-        //             dispatch(changeAdress(firstGeoObject.getAddressLine()))
-        //         });
-        // }
+        if (mapInstanceRef) {
+            mapInstanceRef.geocode(coords)
+                .then((res: any) => {
+                    const firstGeoObject = res.geoObjects.get(0);
+                    dispatch(changeAdress(firstGeoObject.getAddressLine()))
+                });
+        }
     }
 
     const onMapClick = (e: any) => {
@@ -51,7 +51,7 @@ export const useMapContainer = () => {
         mapInstanceRef,
         pins,
         hideSideBar,
-        currentPin,
+        currentBalloon,
         getAddress,
         onMapClick,
     }

@@ -1,5 +1,4 @@
 import { AddButton } from "../components/AddButton/AddButton";
-import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import { MapContainer } from "../components/MapContainer/MapContainer";
 import { SideBar } from "../components/SideBar/SideBar";
 import { useApp } from "./App.hook";

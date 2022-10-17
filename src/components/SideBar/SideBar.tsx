@@ -5,7 +5,6 @@ import { DropDown } from "./components/DropDown/DropDown";
 import { useSideBar } from "./sideBar.hook";
 import styles from "./sideBar.module.scss"
 
-
 export const SideBar = () => {
 
     const {
@@ -20,7 +19,7 @@ export const SideBar = () => {
         <div className={styles.sidebar}>
             <div>
                 <h1 className={styles.sidebar__heading}>Выберете адрес на карте</h1>
-                <p>Адрес: {currentBalloon === null ? "Не выбран" : (currentBalloon as BalloonData).adress}</p>
+                <h4>Адрес: {currentBalloon.currentBalloon === null ? "Не выбран" : currentBalloon.currentBalloon.adress}</h4>
                 <DropDown options={data?.reference.titles || []} selectId={"title"} handleChange={handleTitleChange} />
                 <DropDown options={data?.reference.descriptions || []} selectId={"description"} handleChange={handleDescriptionChange} />
             </div>
@@ -28,7 +27,7 @@ export const SideBar = () => {
                 title={"Добавить"}
                 className={styles.sidebar__button}
                 handleClick={handleAddClick}
-                disabled={currentBalloon === null || currentBalloon.title === "" || currentBalloon.description === "" || !currentBalloon.coordinates}
+                disabled={currentBalloon.currentBalloon === null || currentBalloon.currentBalloon.title === "" || currentBalloon.currentBalloon.description === "" || !currentBalloon.currentBalloon.coordinates}
             />
         </div>
     )
