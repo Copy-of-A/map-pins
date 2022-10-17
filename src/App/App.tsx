@@ -1,4 +1,5 @@
 import { AddButton } from "../components/AddButton/AddButton";
+import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import { MapContainer } from "../components/MapContainer/MapContainer";
 import { SideBar } from "../components/SideBar/SideBar";
 import { useApp } from "./App.hook";
@@ -6,7 +7,7 @@ import { useApp } from "./App.hook";
 import "./App.scss"
 
 export const App = () => {
-    
+
     const {
         handleClick,
         hideSideBar,
@@ -15,11 +16,12 @@ export const App = () => {
     return (
         <>
             <MapContainer />
-            <AddButton
-                handleClick={handleClick}
-                className="addButton" title={"Добавить Адрес"}
-            />
-            {!hideSideBar && <SideBar />}
+            {hideSideBar ?
+                <AddButton
+                    handleClick={handleClick}
+                    className="addButton" title={"Добавить Адрес"}
+                />
+                : <SideBar />}
         </>
     )
 }

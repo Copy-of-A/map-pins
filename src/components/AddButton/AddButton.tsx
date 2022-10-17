@@ -5,7 +5,7 @@ import styles from "./addButton.module.scss"
 interface AddButtonProps {
     title: string,
     handleClick: () => void;
-    disabled: boolean;
+    disabled?: boolean;
     className?: string;
 }
 

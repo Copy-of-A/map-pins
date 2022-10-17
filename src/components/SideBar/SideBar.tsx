@@ -5,11 +5,8 @@ import { DropDown } from "./components/DropDown/DropDown";
 import { useSideBar } from "./sideBar.hook";
 import styles from "./sideBar.module.scss"
 
-interface SideBarProps {
 
-}
-
-export const SideBar: FC<SideBarProps> = (props) => {
+export const SideBar = () => {
 
     const {
         currentBalloon,
@@ -19,7 +16,6 @@ export const SideBar: FC<SideBarProps> = (props) => {
         handleDescriptionChange,
     } = useSideBar();
 
-    console.log("data", data?.reference.titles)
     return (
         <div className={styles.sidebar}>
             <div>
@@ -32,7 +28,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
                 title={"Добавить"}
                 className={styles.sidebar__button}
                 handleClick={handleAddClick}
-                disabled={currentBalloon.title === "" || currentBalloon.description === ""}
+                disabled={currentBalloon === null || currentBalloon.title === "" || currentBalloon.description === "" || !currentBalloon.coordinates}
             />
         </div>
     )

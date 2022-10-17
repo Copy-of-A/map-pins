@@ -43,9 +43,13 @@ export const baloonsSlice = createSlice({
     reducers: {
         addBalloon: (state: Array<BalloonData>, action: PayloadAction<BalloonData>) => {
             state.push(action.payload)
-        }
+        },
+        changeIsActive: (state: Array<BalloonData>, action: PayloadAction<string>) => {
+            const idx = state.find((balloon) => balloon.id === action.payload);
+            idx!.isActive = !idx!.isActive;
+        },
     }
 })
 
-export const { addBalloon } = baloonsSlice.actions
+export const { addBalloon, changeIsActive } = baloonsSlice.actions
 export default baloonsSlice.reducer

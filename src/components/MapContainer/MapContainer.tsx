@@ -1,14 +1,10 @@
-import { useRef, useState } from "react";
 import {
     YMaps,
     Map,
-    Placemark,
-    YMapsApi,
 } from "react-yandex-maps";
 import { Balloon } from "./components/Balloon/Balloon";
-import type { RootState } from '../../store'
-import { useSelector, useDispatch } from 'react-redux'
-import { addBalloon } from './components/Balloon/models/balloons.slice'
+import { useMapContainer } from "./mapContainer.hook";
+import styles from "./map.module.scss"
 
 const mapState = {
     center: [55.751574, 37.573856],
@@ -16,34 +12,34 @@ const mapState = {
 };
 
 export const MapContainer = () => {
-    const handleClick = () => console.log("BaloonClick")
-    const [mapRef, setMapRef] = useState<any>(null);
-    const [mapInstanceRef, setMapInstanceRef] = useState<YMapsApi | null>(null)
-    const pins = useSelector((state: RootState) => state.balloons);
-    console.log("pins", pins)
-    const dispatch = useDispatch()
-
-    const createTemplateLayoutFactory = (ymaps: any) => {
-        setMapInstanceRef(ymaps)
-    }
+    const {
+        createTemplateLayoutFactory,
+        handleClickPin,
+        mapInstanceRef,
+        pins,
+        hideSideBar,
+        currentPin,
+        onMapClick,
+    } = useMapContainer();
 
     return (
-        <YMaps
-            instanceRef={(ref: any) => {
-                if (ref) {
-                    setMapRef(ref);
-                }
-            }}
-        >
-            <Map
-                onLoad={createTemplateLayoutFactory}
-                style={{ width: "100%", height: "100vh", padding: 0 }}
-                defaultState={mapState}
-                modules={['templateLayoutFactory']}
+        <>
+            {pins.length === 0 && hideSideBar && <div className={styles.overlay}><h1>Пусто</h1></div>}
+            <YMaps
+                query={{ load: "package.full", apikey: "25ee6f03-e8c6-4612-96ea-e0d817effe5a" }}
             >
-                {pins.map((_) => <Balloon pin={_} key={_.id} onClick={handleClick} mapInstanceRef={mapInstanceRef} />)}
-            </Map>
-        </YMaps>
+                <Map
+                    onLoad={createTemplateLayoutFactory}
+                    style={{ width: "100%", height: "100vh", padding: 0 }}
+                    defaultState={mapState}
+                    modules={['templateLayoutFactory']}
+                    onClick={onMapClick}
+                >
+                    {currentPin && <Balloon pin={currentPin} key={currentPin.id} onClick={() => { }} mapInstanceRef={mapInstanceRef} isNewPin={true} />}
+                    {pins && pins.map((_) => <Balloon pin={_} key={_.id} onClick={handleClickPin} mapInstanceRef={mapInstanceRef} isNewPin={false} />)}
+                </Map>
+            </YMaps>
+        </>
     )
 }
 

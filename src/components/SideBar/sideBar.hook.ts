@@ -4,6 +4,7 @@ import { RootState } from "../../store"
 import { DropDownOption } from "./components/DropDown/DropDown"
 import { changeTitle, changeDescription, resetCurrentBaloon } from "../MapContainer/components/Balloon/models/currentBalloon.slice"
 import { addBalloon } from "../MapContainer/components/Balloon/models/balloons.slice"
+import { setIsActive } from "./sidebar.slice"
 
 export interface JsonObject {
     reference: {
@@ -25,11 +26,9 @@ export const useSideBar = () => {
             }
         })
             .then((response) => {
-                console.log(response)
                 return response.json();
             })
             .then((myJson) => {
-                console.log(myJson);
                 setData(myJson)
             });
     }
@@ -39,7 +38,11 @@ export const useSideBar = () => {
     }, [])
 
     const handleAddClick = () => {
-        if (currentBalloon) dispatch(addBalloon(currentBalloon))
+        if (currentBalloon) {
+            dispatch(addBalloon(currentBalloon))
+            dispatch(resetCurrentBaloon())
+            dispatch(setIsActive())
+        }
     }
 
     const handleTitleChange = (e: ChangeEvent) => {
