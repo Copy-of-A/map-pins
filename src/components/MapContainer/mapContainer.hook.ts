@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     YMapsApi,
 } from "react-yandex-maps";
-import type { RootState } from '../../store'
+import type { RootState } from '../../app/store'
 import { useSelector, useDispatch } from 'react-redux'
-import { changeAdress, addPinData } from './components/Balloon/models/currentBalloon.slice'
-import { changeIsActive } from "./components/Balloon/models/balloons.slice";
+import { changeAdress, addPinData } from '../../app/features/currentBalloon.slice'
+import { changeIsActive } from "../../app/features/balloons.slice";
+import { setIsActive } from "../../app/features/sidebar.slice";
 
 export const useMapContainer = () => {
     const handleClickPin = (id: string) => {
@@ -22,6 +23,8 @@ export const useMapContainer = () => {
     const createTemplateLayoutFactory = (ymaps: any) => {
         setMapInstanceRef(ymaps)
     }
+    
+    const [progress, setProgress] = useState(0)
 
     // Определяем адрес по координатам (обратное геокодирование).
     function getAddress(coords: [number, number]) {
@@ -45,6 +48,17 @@ export const useMapContainer = () => {
         !hideSideBar && getAddress(e.get('coords'))
     }
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setProgress((progress) => progress += 15 )
+          }, 160);
+        return () => clearInterval(interval);
+    }, [])
+
+
+    const handleClickAddButton = () => dispatch(setIsActive())
+
+
     return {
         createTemplateLayoutFactory,
         handleClickPin,
@@ -54,5 +68,7 @@ export const useMapContainer = () => {
         currentBalloon,
         getAddress,
         onMapClick,
+        progress,
+        handleClickAddButton
     }
 }

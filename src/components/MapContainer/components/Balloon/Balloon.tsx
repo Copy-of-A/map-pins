@@ -5,7 +5,7 @@ import {
     YMapsApi
 } from "react-yandex-maps";
 import './balloon.scss'
-import { BalloonData, changeIsActive } from "./models/balloons.slice";
+import { BalloonData, changeIsActive } from "../../../../app/features/balloons.slice";
 
 type BalloonProps = {
     pin: BalloonData;

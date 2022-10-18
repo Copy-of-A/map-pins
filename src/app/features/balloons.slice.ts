@@ -13,28 +13,28 @@ export interface BalloonData {
 }
 
 const initialState: Array<BalloonData> = [
-    {
-        id: "0",
-        coordinates: {
-            lat: 55.684758,
-            lon: 37.738521,
-        },
-        title: "My title",
-        description: "My description",
-        isActive: false,
-        adress: "My adress"
-    },
-    {
-        id: "1",
-        coordinates: {
-            lat: 55.8,
-            lon: 37.8,
-        },
-        title: "My title 111",
-        description: "My description 1111 with many many words in baloon more than 2 strings or maybe even three. My description 1111 with many many words in baloon more than 2 strings or maybe even three",
-        isActive: false,
-        adress: "My adress 1111"
-    }
+    // {
+    //     id: "0",
+    //     coordinates: {
+    //         lat: 55.684758,
+    //         lon: 37.738521,
+    //     },
+    //     title: "My title",
+    //     description: "My description",
+    //     isActive: false,
+    //     adress: "My adress"
+    // },
+    // {
+    //     id: "1",
+    //     coordinates: {
+    //         lat: 55.8,
+    //         lon: 37.8,
+    //     },
+    //     title: "My title 111",
+    //     description: "My description 1111 with many many words in baloon more than 2 strings or maybe even three. My description 1111 with many many words in baloon more than 2 strings or maybe even three",
+    //     isActive: false,
+    //     adress: "My adress 1111"
+    // }
 ]
 
 export const baloonsSlice = createSlice({

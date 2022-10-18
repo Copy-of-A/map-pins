@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { AddButton } from "../AddButton/AddButton";
-import { BalloonData } from "../MapContainer/components/Balloon/models/balloons.slice";
+import { BalloonData } from "../../app/features/balloons.slice";
 import { DropDown } from "./components/DropDown/DropDown";
 import { useSideBar } from "./sideBar.hook";
 import styles from "./sideBar.module.scss"

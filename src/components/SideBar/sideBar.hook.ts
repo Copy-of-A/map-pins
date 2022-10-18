@@ -1,10 +1,10 @@
 import { ChangeEvent, useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "../../store"
+import { RootState } from "../../app/store"
 import { DropDownOption } from "./components/DropDown/DropDown"
-import { changeTitle, changeDescription, resetCurrentBaloon } from "../MapContainer/components/Balloon/models/currentBalloon.slice"
-import { addBalloon } from "../MapContainer/components/Balloon/models/balloons.slice"
-import { setIsActive } from "./sidebar.slice"
+import { changeTitle, changeDescription, resetCurrentBaloon } from "../../app/features/currentBalloon.slice"
+import { addBalloon } from "../../app/features/balloons.slice"
+import { setIsActive } from "../../app/features/sidebar.slice"
 
 export interface JsonObject {
     reference: {

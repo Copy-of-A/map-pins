@@ -13,6 +13,7 @@ export const sidebarSlice = createSlice({
   initialState,
   reducers: {
     setIsActive: (state) => {
+      console.log("!")
       state.isActive = !state.isActive
     },
   },
