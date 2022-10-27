@@ -1,5 +1,7 @@
 # map-pins
 
+[ТЗ](https://kindhearted-equipment-3e7.notion.site/React-fd2fe66b1bec4125ba8ef70c67b2a5b4)
+
 [Ссылка](https://copy-of-a.github.io/map-pins/) на продакшн
 
 ## Для запуска локально: 
